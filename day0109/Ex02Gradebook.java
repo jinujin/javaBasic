@@ -138,7 +138,7 @@ public class Ex02Gradebook {
         System.out.println("번호: "+id+"번"+"  이름: "+name);
 //        System.out.println("국어: "+k+"점"+" 영어: "+e+"점"+" 수학: "+m+"점");
         System.out.printf("국어: %d점 영어: %d점 수학: %d점\n", k,e,m);
-        System.out.printf("총점: %d점 평균: %f점\n",calculateSum(k,e,m),calculateMean(k,e,m));
+        System.out.printf("총점: %d점 평균: %.2f점\n",calculateSum(k,e,m),calculateMean(k,e,m));
 
     }
 

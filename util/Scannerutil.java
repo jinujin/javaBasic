@@ -32,7 +32,7 @@ public class Scannerutil {
     // 4. 사용자로부터 특정 범위의 정수 입력을 담당하는 nextInt()
     // 매개변수가 다르면 메소드 이름은 동일해도 무방
     public static int nextInt(Scanner scanner, String message, int min, int max){
-        printMessage(message);
+
         int temp = nextInt(scanner,message);
 
         while(temp < min || temp > max){
