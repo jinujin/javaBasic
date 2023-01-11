@@ -9,7 +9,7 @@ package day0109;
 // 총점: ##점 평균: ##.#####점
 
 
-import util.Scannerutil;
+import util.ScannerUtil;
 
 import java.util.Scanner;
 
@@ -46,7 +46,7 @@ public class Ex02Gradebook {
 //        temp = scan.nextInt();
 
 //        return temp;
-        return Scannerutil.nextInt(scan, message);
+        return ScannerUtil.nextInt(scan, message);
     }
 
     public static String getName(Scanner scan){
@@ -54,7 +54,7 @@ public class Ex02Gradebook {
 //        String message;
         String message ="학생의 이름을 입력해주세요.";
 
-        temp = Scannerutil.nextLine(scan,message);
+        temp = ScannerUtil.nextLine(scan,message);
 //        System.out.println(message);
 //        System.out.print("> ");
 //        scan.nextLine();
@@ -106,7 +106,7 @@ public class Ex02Gradebook {
 //            temp = scan.nextInt();
 //        }
 
-        return Scannerutil.nextInt(scan,message,0,100);
+        return ScannerUtil.nextInt(scan,message,0,100);
     }
 
     public static int getMath(Scanner scan){

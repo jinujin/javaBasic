@@ -3,7 +3,7 @@ package util;
 import java.util.Scanner;
 
 // Scanner 클래스를 통해 입력을 받을 시에 도움이 될만한 static 메소드를 모아둔 클래스
-public class Scannerutil {
+public class ScannerUtil {
     // 1. 입력시 사용자에게 보여줄 메시지 출력을 담당할 메소드
     public static void printMessage(String message){
         System.out.println(message);

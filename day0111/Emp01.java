@@ -1,17 +1,11 @@
-package day0110;
-/*
- 1. 5명의 학생의 성적을 관리하는 프로그램을 작성하시오.
-    단, 5명을 모두 입력한 후에는 더이상 입력할 수 없도록 코드를 작성하시오.
- 2. 5명의 학생 성적을 관리하는 프로그램을 작성하시오.
-     단, 5명을 모두 입력한 후에 새로운 학생 정보를 입력할 시에는
-     가장 오래된 기록을 제거하고 새로운 학생 정보를 입력되도록 코드를 작성하시오.
- */
+package day0111;
+
 
 import util.ScannerUtil;
 
 import java.util.Scanner;
 
-public class Ex12Gradbook03 {
+public class Emp01 {
 
     public static final int STUDENT_SIZE = 5;
     public static final int SCORE_MIN = 0;
@@ -28,13 +22,14 @@ public class Ex12Gradbook03 {
 
     public static void showMenu(){
         while(true){
+            Student s = new Student();
             String message = "1. 입력 2. 출력 3. 종료";
             int userChoice = ScannerUtil.nextInt(SCANNER,message);
 
             if(userChoice==1){
                 insertStudent();
             } else if (userChoice==2) {
-                printStudent();
+                s.print();
             } else if (userChoice==3) {
                 System.out.println("사용해주셔서 감사합니다.");
                 break;
@@ -54,19 +49,19 @@ public class Ex12Gradbook03 {
             String message;
 
             message = "학생의 번호를 입력해주세요.";
-            s.id = ScannerUtil.nextInt(SCANNER,message);
+            s.setId(ScannerUtil.nextInt(SCANNER,message));
 
             message = "학생의 이름을 입력해주세요.";
-            s.name = ScannerUtil.nextLine(SCANNER,message);
+            s.setName(ScannerUtil.nextLine(SCANNER,message));
 
             message = "학생의 국어점수를 입력해주세요.";
-            s.korean = ScannerUtil.nextInt(SCANNER,message,SCORE_MIN,SCORE_MAX);
+            s.setKorean(ScannerUtil.nextInt(SCANNER,message,SCORE_MIN,SCORE_MAX));
 
             message = "학생의 영어점수를 입력해주세요.";
-            s.english = ScannerUtil.nextInt(SCANNER,message,SCORE_MIN,SCORE_MAX);
+            s.setEnglish(ScannerUtil.nextInt(SCANNER,message,SCORE_MIN,SCORE_MAX));
 
             message = "학생의 수학점수를 입력해주세요.";
-            s.math = ScannerUtil.nextInt(SCANNER,message,SCORE_MIN,SCORE_MAX);
+            s.setMath(ScannerUtil.nextInt(SCANNER,message,SCORE_MIN,SCORE_MAX));
 
             studentArray[index] = s;
     }
@@ -84,7 +79,7 @@ public class Ex12Gradbook03 {
         }
         return -1;
     }
-
+/*
     public static void printStudent() {
         if(findNextIndex()==0){
             System.out.println("아직 입력된 학생이 존재하지 않습니다.");
@@ -95,16 +90,16 @@ public class Ex12Gradbook03 {
             }
             for(int i=0;i<lastIndex;i++){
                 Student s = studentArray[i];
-                System.out.println("번호: "+ s.id );
-                System.out.println("이름: "+ s.name );
-                System.out.println("국어: "+ s.korean );
-                System.out.println("영어: "+ s.english );
-                System.out.println("수학: "+ s.math );
+                System.out.println("번호: "+ s.getId() );
+                System.out.println("이름: "+ s.getName() );
+                System.out.println("국어: "+ s.getKorean() );
+                System.out.println("영어: "+ s.getEnglish() );
+                System.out.println("수학: "+ s.getMath() );
             }
         }
 
     }
-
+*/
 
 
 

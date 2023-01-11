@@ -7,7 +7,7 @@ package day0110;
  작성하시오.
  */
 
-import util.Scannerutil;
+import util.ScannerUtil;
 
 import java.util.Scanner;
 
@@ -19,7 +19,7 @@ public class Ex04Gradeboodk02 {
 
         while(true){
             String message = "1. 입력 2. 출력 3. 종료";
-            int n = Scannerutil.nextInt(scanner,message);
+            int n = ScannerUtil.nextInt(scanner,message);
             if(n==1){
                 message = "학생 번호";
                 insertInfo(scanner, s);
@@ -43,10 +43,10 @@ public class Ex04Gradeboodk02 {
         String message;
 
         message = "학생 번호";
-        s.id = Scannerutil.nextInt(scanner,message);
+        s.id = ScannerUtil.nextInt(scanner,message);
 
         message = "학생 이름";
-        s.name = Scannerutil.nextLine(scanner,message);
+        s.name = ScannerUtil.nextLine(scanner,message);
     }
 
     public static void printInfo(Student s){

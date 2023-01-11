@@ -2,7 +2,7 @@ package day0110;
 /*
  전역 변수(Global Variable)
  */
-import util.Scannerutil;
+import util.ScannerUtil;
 
 import java.util.Scanner;
 public class Ex05GlobalVar {
@@ -15,7 +15,7 @@ public class Ex05GlobalVar {
     public static void main(String[] args) {
         while (true){
             String message = "1. 입력 2. 출력 3. 종류";
-            int userChoice = Scannerutil.nextInt(SCANNER,message);
+            int userChoice = ScannerUtil.nextInt(SCANNER,message);
             if(userChoice==1){
                 insertInfo();
             } else if (userChoice == 2) {
@@ -38,10 +38,10 @@ public class Ex05GlobalVar {
         String message;
 
         message = "학생 번호";
-        student.id = Scannerutil.nextInt(SCANNER,message);
+        student.id = ScannerUtil.nextInt(SCANNER,message);
 
         message = "학생 이름";
-        student.name = Scannerutil.nextLine(SCANNER,message);
+        student.name = ScannerUtil.nextLine(SCANNER,message);
     }
 
     public static void printInfo(){

@@ -11,7 +11,7 @@ package day0110;
  사용자 숫자, 컴퓨터 숫자, 총 맞은 갯수를 출력하는 프로그램을 작성하시오.
  */
 
-import util.Scannerutil;
+import util.ScannerUtil;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -34,12 +34,12 @@ public class Ex10Lotto03 {
         }
 */
         String message = "1. 자동 2. 수동";
-        int userChoice = Scannerutil.nextInt(SCANNER,message);
+        int userChoice = ScannerUtil.nextInt(SCANNER,message);
 
         if(userChoice == 1){
-            setAutoNumbers(userNumbers);
+            setAutoNumbers(userNumbers); // 자동
         } else {
-            setManualNumbers(userNumbers);
+            setManualNumbers(userNumbers); // 수동
         }
 
         sort(userNumbers);
@@ -73,7 +73,7 @@ public class Ex10Lotto03 {
 
     public static void setManualNumbers(int[] array){
         for(int i =0; i< array.length;){
-            int temp = Scannerutil.nextInt(SCANNER,"1-45 사이의 숫자를 입력해주세요.",1,45);
+            int temp = ScannerUtil.nextInt(SCANNER,"1-45 사이의 숫자를 입력해주세요.",1,45);
             if(!contains(array,temp)){
                 array[i] = temp;
                 i++;

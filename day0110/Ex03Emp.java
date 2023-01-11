@@ -6,7 +6,7 @@ package day0110;
  사원 정보 입력, 출력은 별개의 메소드를 통하여 관리합니다.
  */
 
-import util.Scannerutil;
+import util.ScannerUtil;
 
 import java.util.Scanner;
 
@@ -57,23 +57,23 @@ public class Ex03Emp {
 
         // 사원 번호 입력
         message = "사원의 번호를 입력해주세요.";
-        e.id = Scannerutil.nextInt(scanner, message);
+        e.id = ScannerUtil.nextInt(scanner, message);
 
         // 사원 이름 입력
         message = "사원의 이름을 입력해주세요.";
-        e.name = Scannerutil.nextLine(scanner,message);
+        e.name = ScannerUtil.nextLine(scanner,message);
 
         // 사원 직급 입력
         message = "사원의 직급을 입력해주세요.";
-        e.posi = Scannerutil.nextLine(scanner,message);
+        e.posi = ScannerUtil.nextLine(scanner,message);
 
         // 사원 부서 입력
         message = "사원의 부서를 입력해주세요.";
-        e.instru = Scannerutil.nextLine(scanner,message);
+        e.instru = ScannerUtil.nextLine(scanner,message);
 
         // 사원 연봉 입력
         message = "사원의 연봉을 입력해주세요.";
-        e.salary = Scannerutil.nextInt(scanner,message);
+        e.salary = ScannerUtil.nextInt(scanner,message);
     }
 
     public static void printInfo2(EInfo e){

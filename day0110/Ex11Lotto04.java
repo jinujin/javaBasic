@@ -8,7 +8,7 @@ package day0110;
  알맞게 처리하는 프로그램
  */
 
-import util.Scannerutil;
+import util.ScannerUtil;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -20,7 +20,7 @@ public class Ex11Lotto04 {
 
     public static void main(String[] args) {
         String message = "총 몇게임을 하시겠습니까?";
-        int gamesize = Scannerutil.nextInt(SCANNER,message);
+        int gamesize = ScannerUtil.nextInt(SCANNER,message);
 
         int[][] userNumbers = new int[gamesize][ARRAY_LENGTH];
 
@@ -36,7 +36,7 @@ public class Ex11Lotto04 {
         for(int i =0;i< arrays.length;i++){
             System.out.println((i+1)+"번째 게임");
             String message = " 1. 자동 2. 수동 ";
-            int userChoice = Scannerutil.nextInt(SCANNER,message,1,2);
+            int userChoice = ScannerUtil.nextInt(SCANNER,message,1,2);
 
             if(userChoice==1){
                 Ex10Lotto03.setAutoNumbers(arrays[i]);
