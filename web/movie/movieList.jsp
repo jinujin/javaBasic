@@ -80,7 +80,6 @@
             font-size: 20px;
         }
 
-
     </style>
 
 
@@ -99,15 +98,14 @@
             FilmController filmController = new FilmController(connectionMaker);
 
             String nn;
-
+            MemberDTO m;
             if (logIn == null) {
                 nn = "로그인 해주세요";
+                m = null;
             } else {
                 nn = memberController.selectOne(logIn.getId()).getNickname();
+                m = memberController.selectOne(logIn.getId());
             }
-
-//            MemberDTO m = memberController.selectOne(id);
-//        FilmDTO f = filmController.selectOne()
 
             ArrayList<FilmDTO> list = filmController.selectAll();
 
@@ -174,6 +172,15 @@
             </div>
         </header>
         <main>
+            <c:set var="m" value="<%=m%>"/>
+            <c:if test="${m != null && m.level==3}">
+                <div class="movieMade">
+                    <button class="btn btn-outline-secondary btn-lg mb-4" onclick="location.href='/movie/movie_register.jsp'">
+                        영화 등록
+                    </button>
+                </div>
+            </c:if>
+
             <c:set var="list" value="<%=list%>"/>
             <c:choose>
                 <c:when test="${list.isEmpty()}">

@@ -23,19 +23,6 @@
         ConnectionMaker connectionMaker = new MysqlConnectionMaker();
         MemberController memberController = new MemberController(connectionMaker);
         FilmController filmController = new FilmController(connectionMaker);
-        GradeController gradeController = new GradeController(connectionMaker);
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yy년 mm월 dd일 H:m:s");
-
-        ArrayList<GradeDTO> list = gradeController.selectAll(filmId);
-//        평점
-        double sum = 0.0;
-        double avg = 0.0;
-        for (GradeDTO g : list) {
-            sum += g.getScore();
-        }
-        avg = sum / list.size();
-        avg = Math.round(avg * 10) / 10.0;
 
         FilmDTO f = filmController.selectOne(filmId);
 
@@ -57,30 +44,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
-    <title><%=f.getTitle()%>
+    <title><%=f.getTitle()%> 수정
     </title>
-    <script>
-        function deleteReply(gid) {
-            let result = confirm("정말로 삭제하시겠습니까?");
-            if (result) {
-                location.href = "/movie/delete_grade.jsp?id=" + gid + "&filmId=" +
-                <%=filmId%>
-            }
-        }
-        function deleteMovie(fid) {
-            let result = confirm("정말로 삭제하시겠습니까?");
-            if (result) {
-                location.href = "/movie/movie_delete.jsp?filmId=" + fid;
-            }
-        }
-    </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nunito:wght@700&display=swap');
 
-        /*.wrapper {*/
-        /*    !*height: auto;*!*/
-        /*    min-height: 100%;*/
-        /*}*/
+        .container {
+            min-height: 100%;
+        }
 
         .fw-bold {
             overflow: hidden;
@@ -102,7 +74,7 @@
             width: 100%;
         }
 
-        header, .text-muted, .description, h2, h3 {
+        header, h2, h3, h4 {
             font-family: 'Gowun Dodum', sans-serif;
         }
 
@@ -115,10 +87,8 @@
             height: 100%;
         }
 
-        .average {
-            margin: 20px 0px;
-            font-size: 25px;
-            font-weight: bold;
+        .row {
+            justify-content: center;
         }
 
     </style>
@@ -179,20 +149,8 @@
         </div>
     </header>
     <main>
-        <c:set var="m" value="<%=m%>"/>
-        <c:if test="${m != null && m.level==3}">
-            <div class="aboutMovie">
-                <button class="btn btn-outline-secondary btn-lg mb-4"
-                        onclick="location.href='/movie/movie_update.jsp?filmId=<%=filmId%>'">
-                    영화 수정
-                </button>
-                <button class="btn btn-outline-secondary btn-lg mb-4" onclick="deleteMovie(<%=filmId%>)">
-                    영화 삭제
-                </button>
-            </div>
-        </c:if>
         <div class="col">
-            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="row g-0 border rounded flex-md-row mb-4 shadow-sm h-md-250">
                 <div class="col-auto d-none d-lg-block">
                     <svg class="bd-placeholder-img" width="330" height="470" xmlns="http://www.w3.org/2000/svg"
                          role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
@@ -200,95 +158,47 @@
                         <image href="/images/<%=f.getImage()%>"></image>
                     </svg>
                 </div>
-                <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-success"></strong>
-                    <h2 class="mb-3"><%=f.getTitle()%>
-                    </h2>
-                    <div class="mb-5 text-muted">관람 등급 : <%=f.getRating()%>
-                    </div>
-                    <p class="description"><%=f.getDescription()%>
-                    </p>
-                </div>
+                <form action="/movie/movieUpdate_logic.jsp?filmId=<%=f.getId()%>" method="post">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h4>포스터</h4>
+                        <div class="mb-3">
+                            <input type="file" class="form-control" id="imgFile" name="imgFile">
+                        </div>
 
+                        <strong class="d-inline-block mb-2 text-success"></strong>
+                        <h4>영화제목</h4>
+                        <div class="mb-3">
+                            <input type="title" name="title" value="<%=f.getTitle()%>" class="form-control">
+                        </div>
+                        <h4>영화등급</h4>
+                        <select class="form-select is-invalid form-control" id="rate" name="rate">
+                            <option>전체관람가</option>
+                            <option>12세이상</option>
+                            <option>15세이상</option>
+                            <option>청소년관람불가</option>
+                        </select>
+                        <div class="invalid-feedback mb-3">
+                            영화 등급을 선택해주세요.
+                        </div>
+                        <div class="mb-3">
+                            <h4>기존 줄거리</h4>
+                            <%=f.getDescription()%>
+                        </div>
+                        <div class="input-group mb-5">
+                            <span class="input-group-text">작 성 란</span>
+                            <textarea class="form-control" aria-label="With textarea" style="height: 110px;"
+                                      id="description" name="description"></textarea>
+                        </div>
+                        <button class="btn btn-outline-info" type="submit">수 정 하 기</button>
+
+                    </div>
+                </form>
             </div>
         </div>
+        <%--        <input>--%>
     </main>
 
-    <h3 class="mb-4"><span class="fw-bold"><%=f.getTitle() %></span> 어떠셨나요?</h3>
-    <form action="/movie/review_logic.jsp?filmId=<%=filmId%>" method="post">
-
-        <div class="col-md-3">
-            <label for="score" class="form-label">Score</label>
-            <select class="form-select is-invalid form-control" id="score" name="score">
-                <%
-                    for (double i = 10.0; i >= 0.0; i -= 0.5) {
-
-                %>
-                <option><%=i%>
-                </option>
-                <%
-                    }
-                %>
-
-            </select>
-            <div class="invalid-feedback">
-                점수를 입력해주세요.
-            </div>
-        </div>
-
-        <div class="input-group">
-            <span class="input-group-text">작 성 란</span>
-            <textarea class="form-control" aria-label="With textarea" style="height: 110px;"
-                      name="criticism"></textarea>
-            <span class="input-group-text"><button class="btn" type="submit">등 록</button></span>
-        </div>
-    </form>
-    <div class="col">
-        <c:set var="list" value="<%=list%>"/>
-        <c:set var="logIn" value="<%=logIn%>"/>
-
-        <c:choose>
-            <c:when test="${list.isEmpty()}">
-                <div class="row">
-                    <div class="col">
-                        <h3 class="mt-4">아직 등록된 리뷰가 존재하지 않습니다.</h3>
-                    </div>
-                </div>
-            </c:when>
-
-            <c:otherwise>
-                <div class="average">
-                    <span>평점 : </span><%=avg%> 점
-                </div>
-                <c:forEach var="g" items="${list}">
-                    <div class="col">
-
-                        <div class="border-bottom mb-3">
-                            <div class="col-md-2 mb-2">
-                                점수 : ${g.score}
-                            </div>
-                            <div class="col-md-10 mb-2">
-                                    ${g.criticism}
-                            </div>
-                            <div>
-                                작성 시간 : <fmt:formatDate value="${g.entry_date}" pattern="yyyy년 MM월 dd일 HH시 mm분 ss초"/>
-                            </div>
-                        </div>
-                        <c:if test="${g.writerId eq logIn.id}">
-                            <button class="btn btn-outline-success"
-                                    onclick="location.href='/movie/updateReview.jsp?id=${g.id}&filmId=<%=filmId%>'">수정
-                            </button>
-                            <button class="btn btn-outline-danger" onclick="deleteReply(${g.id})">삭제</button>
-                        </c:if>
-
-                    </div>
-                </c:forEach>
-            </c:otherwise>
-        </c:choose>
-
-    </div>
-    <%@include file="/footer.jsp" %>
 </div>
-
+<%@include file="/footer.jsp" %>
 </body>
 </html>

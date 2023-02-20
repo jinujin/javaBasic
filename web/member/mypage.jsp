@@ -71,8 +71,12 @@
             justify-content: end;
         }
 
+
         .button button:first-child {
-            margin-right: 6px;
+            margin-right: 380px;
+        }
+        .button button:nth-child(2){
+            margin-right: 10px;
         }
 
         .list-group-item {
@@ -127,6 +131,14 @@
     </style>
 
     <title>내 정보</title>
+    <script>
+        function deleteMember(id) {
+            let result = confirm("정말로 탈퇴하시겠습니까?");
+            if (result) {
+                location.href = "/member/delete_logic.jsp?id="+id;
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="container">
@@ -246,6 +258,8 @@
             </div>
 
             <div class="button">
+                <button type="button" class="btn btn-outline-danger btn-sm" onclick="deleteMember(<%=m.getId()%>)">회원탈퇴
+                </button>
                 <button type="button" class="btn btn-outline-success btn-sm" onclick="location.href='/main.jsp'">메인
                 </button>
                 <button type="button" class="btn btn-success" onclick="location.href='/member/update.jsp?id=<%=m.getId()%>'">수정하기
