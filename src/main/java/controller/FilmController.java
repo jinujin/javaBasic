@@ -17,7 +17,7 @@ public class FilmController {
     }
 
     public void insert(FilmDTO filmDTO) {
-        String query = "INSERT INTO `film`(`title`, `description`, `rating`) VALUES(?,?,?)";
+        String query = "INSERT INTO `film`(`title`, `description`, `rating`,`image`) VALUES(?,?,?,?)";
 
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
@@ -25,6 +25,7 @@ public class FilmController {
             pstmt.setString(1, filmDTO.getTitle());
             pstmt.setString(2, filmDTO.getDescription());
             pstmt.setString(3, filmDTO.getRating());
+            pstmt.setString(4, filmDTO.getImage());
 
             pstmt.executeUpdate();
 
@@ -49,6 +50,7 @@ public class FilmController {
                 f.setTitle(resultSet.getString("title"));
                 f.setDescription(resultSet.getString("description"));
                 f.setRating(resultSet.getString("rating"));
+                f.setImage(resultSet.getString("image"));
 
                 list.add(f);
             }
@@ -78,6 +80,7 @@ public class FilmController {
                 filmDTO.setTitle(resultSet.getString("title"));
                 filmDTO.setDescription(resultSet.getString("description"));
                 filmDTO.setRating(resultSet.getString("rating"));
+                filmDTO.setImage(resultSet.getString("image"));
 
             }
 
@@ -92,7 +95,7 @@ public class FilmController {
     }
 
     public void update(FilmDTO filmDTO) {
-        String query = "UPDATE `film` SET `title` = ?, `description` = ?, `rating` = ? WHERE `id` = ?";
+        String query = "UPDATE `film` SET `title` = ?, `description` = ?, `rating` = ?, `image` = ? WHERE `id` = ?";
 
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
@@ -100,7 +103,8 @@ public class FilmController {
             pstmt.setString(1,filmDTO.getTitle());
             pstmt.setString(2,filmDTO.getDescription());
             pstmt.setString(3,filmDTO.getRating());
-            pstmt.setInt(4,filmDTO.getId());
+            pstmt.setString(4, filmDTO.getImage());
+            pstmt.setInt(5,filmDTO.getId());
 
             pstmt.executeUpdate();
 

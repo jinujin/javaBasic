@@ -8,5 +8,6 @@ public class FilmDTO {
     private String title;
     private String description;
     private String rating;
+    private String image;
 
 }

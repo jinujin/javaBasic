@@ -14,22 +14,23 @@ public class MemberController {
         this.connection = connectionMaker.makeConnection();
     }
 
-    public void insert(MemberDTO memberDTO) {
-        String query ="INSERT INTO `member`(`username`, `password`, `nickname`,`level`) VALUES(?,?,?,?)";
+    public boolean insert(MemberDTO memberDTO) {
+        String query ="INSERT INTO `member`(`username`, `password`, `nickname`,`level`,`email`) VALUES(?,?,?,?,?)";
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, memberDTO.getUsername());
             pstmt.setString(2, memberDTO.getPassword());
             pstmt.setString(3, memberDTO.getNickname());
             pstmt.setInt(4, memberDTO.getLevel());
+            pstmt.setString(5,memberDTO.getEmail());
 
             pstmt.executeUpdate();
 
             pstmt.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            return false;
         }
-
+        return true;
     }
 
     public MemberDTO auth(String username, String password){
@@ -63,14 +64,16 @@ public class MemberController {
     }
 
     public void update(MemberDTO memberDTO) {
-        String query = "UPDATE `member` SET `password` = ?, `nickname` = ? WHERE `id` = ?";
+        String query = "UPDATE `member` SET `password` = ?, `nickname` = ?, `email` = ? WHERE `id` = ?";
 
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
 
             pstmt.setString(1,memberDTO.getPassword());
             pstmt.setString(2,memberDTO.getNickname());
-            pstmt.setInt(3,memberDTO.getId());
+            pstmt.setString(3, memberDTO.getEmail());
+//            pstmt.setInt(5,memberDTO.getLevel());
+            pstmt.setInt(4,memberDTO.getId());
 
             pstmt.executeUpdate();
 
@@ -111,8 +114,13 @@ public class MemberController {
 
             if (resultSet.next()) {
                 m = new MemberDTO();
+                m.setUsername(resultSet.getString("username"));
                 m.setId(resultSet.getInt("id"));
                 m.setNickname(resultSet.getString("nickname"));
+                m.setEmail(resultSet.getString("email"));
+                m.setLevel(resultSet.getInt("level"));
+                m.setPassword(resultSet.getString("password"));
+
             }
         } catch (SQLException e) {
             e.printStackTrace();

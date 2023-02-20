@@ -9,5 +9,6 @@ public class MemberDTO {
     private String password;
     private String nickname;
     private int level;
+    private String email;
 
 }

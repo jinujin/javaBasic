@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class MySqlConnectionMaker implements ConnectionMaker {
-    private final String ADDRRESS = "jdbc:mysql://localhost/movie";
+public class MysqlConnectionMaker implements ConnectionMaker {
+    private final String ADDRRESS = "jdbc:mysql://52.78.136.223/movie";
     private final String USERNAME = "root";
-    private final String PASSWORD = "0426";
+    private final String PASSWORD = "1111";
 
     @Override
     public Connection makeConnection() {
