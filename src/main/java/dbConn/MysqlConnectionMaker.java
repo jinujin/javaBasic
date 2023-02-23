@@ -18,11 +18,11 @@ public class MysqlConnectionMaker implements ConnectionMaker{
             throw new RuntimeException(e);
         }
 //
-        System.out.println("MySql 데이터베이스 연결 시도");
+//        System.out.println("MySql 데이터베이스 연결 시도");
 //        System.out.println("연결 주소: "+ ADDRESS);
 //        System.out.println("아이디: "+ USERNAME);
 //        System.out.println("비밀번호: "+ PASSWORD);
-        System.out.println("연결 성공");
+//        System.out.println("연결 성공");
         return connection;
     }
 }
