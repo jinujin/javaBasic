@@ -149,6 +149,9 @@
                     </tr>
                 </table>
             </form>
+            <button class="btn btn-outline-success" onclick="location.href='/board/printList.jsp'">
+                글 목록으로
+            </button>
         </div>
 
     </div>

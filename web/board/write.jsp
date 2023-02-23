@@ -12,15 +12,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
+    <script src="/assets/build/ckeditor.js"></script>
     <%
         UserDTO logIn = (UserDTO) session.getAttribute("logIn");
-        System.out.println(logIn);
         if (logIn == null) {
             response.sendRedirect("/index.jsp");
         }
 
     %>
     <title>글 작성하기</title>
+    <style>
+        .ck-editor__editable {
+            height: 500px;
+        }
+    </style>
 </head>
 
 <body>
@@ -38,9 +43,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <textarea name="content" class="form-control">
-
-                            </textarea>
+                            <textarea id="editor" name="content"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -53,8 +56,18 @@
 
                 </table>
             </form>
+            <button class="btn btn-outline-success" onclick="location.href='/board/printList.jsp'">
+                글 목록으로
+            </button>
         </div>
     </div>
 </div>
+<script>
+    ClassicEditor.create(document.querySelector('#editor'),{
+
+    }).catch(error =>{
+        console.log(error);
+    });
+</script>
 </body>
 </html>

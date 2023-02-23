@@ -17,6 +17,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
+    <script src="/assets/build/ckeditor.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <%
         UserDTO logIn = (UserDTO) session.getAttribute("logIn");
         System.out.println(logIn);
@@ -36,6 +38,12 @@
         }
     %>
     <title><%=b.getTitle()%> 글 수정하기</title>
+    <style>
+        .ck-editor__editable {
+            height: 500px;
+            color: black;
+        }
+    </style>
 </head>
 
 <body>
@@ -58,7 +66,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <textarea name="content" class="form-control">
+                            <textarea name="content" id="editor">
                                 <%=b.getContent()%>
                             </textarea>
                         </td>
@@ -73,8 +81,24 @@
 
                 </table>
             </form>
+            <button class="btn btn-outline-success" onclick="location.href='/board/printList.jsp'">
+                글 목록으로
+            </button>
         </div>
     </div>
 </div>
+<script>
+    ClassicEditor.create(document.querySelector('#editor')).catch(error => {
+        console.log(error)
+    });
+    let tag = document.querySelectorAll('td');
+    console.log(tag)
+    console.log(document.getElementsByTagName("td"));
+    tag.forEach(e => {
+        console.log(e);
+    })
+    $($('td')[0]).text('내맘대로');
+    $('input[name="title"]').val("바꾼다!");
+</script>
 </body>
 </html>
