@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nunito:wght@700&display=swap');
+
+#mybg {
+    position: relative;
+    background-image: url("/images/bgtheater.jpg");
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+#mydiv {
+    width: 57rem;
+    height: 36rem;
+}
+
+#bgtext {
+    padding: 50px 40px 0;
+    width: 60%;
+}
+
+#bgtext > div > div {
+    position: absolute;
+    font-family: 'Gowun Dodum', sans-serif;
+    animation-name: move;
+    animation-duration: 10s;
+    animation-play-state: running;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    width: 80%;
+    text-align: center;
+
+}
+.wrapper{
+    min-height: 80%;
+    min-width: 100%;
+}
+
+#bgtext > div {
+    width: 100%;
+    height: 60%;
+    display: flex;
+}
+
+#mybg > div > h1 {
+    font-family: 'Nunito', sans-serif;
+}
+
+.fw-light {
+    margin: 0;
+}
+main{
+    background-color: black;
+    margin-left: 15px;
+    margin-right: 15px;
+    display: flex;
+    justify-content: center;
+    box-shadow: -5px -5px 10px 5px red, 5px 5px 10px 5px blue;
+    /*box-shadow: 0 0 10px 5px;*/
+}
+.container{
+    display: flex;
+    align-items: center;
+}
+
+@keyframes move {
+    0% {
+        /*bottom: 220px;*/
+        bottom: 30%;
+    }
+    100% {
+        /*bottom: 360px;*/
+        bottom: 50%;
+    }
+
+
+}

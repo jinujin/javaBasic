@@ -19,15 +19,14 @@ public class CinemaController {
     }
 
     public void insert(CinemaDTO cinemaDTO) {
-        String query = "INSERT INTO `cinema`(`film_id`,`name`,`location`,`number`) VALUES(?,?,?,?)";
+        String query = "INSERT INTO `cinema`(`name`,`location`,`number`) VALUES(?,?,?)";
 
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
 
-            pstmt.setInt(1, cinemaDTO.getFilmId());
-            pstmt.setString(2, cinemaDTO.getName());
-            pstmt.setString(3, cinemaDTO.getLocation());
-            pstmt.setString(4, cinemaDTO.getNumber());
+            pstmt.setString(1, cinemaDTO.getName());
+            pstmt.setString(2, cinemaDTO.getLocation());
+            pstmt.setString(3, cinemaDTO.getNumber());
 
             pstmt.executeUpdate();
 
@@ -54,7 +53,6 @@ public class CinemaController {
                 CinemaDTO c = new CinemaDTO();
                 c.setId(resultSet.getInt("id"));
                 c.setName(resultSet.getString("name"));
-                c.setFilmId(resultSet.getInt("film_id"));
                 c.setLocation(resultSet.getString("location"));
                 c.setNumber(resultSet.getString("number"));
 
@@ -90,7 +88,6 @@ public class CinemaController {
                 c = new CinemaDTO();
                 c.setId(resultSet.getInt("id"));
                 c.setName(resultSet.getString("name"));
-                c.setFilmId(resultSet.getInt("film_id"));
                 c.setLocation(resultSet.getString("location"));
                 c.setNumber(resultSet.getString("number"));
 

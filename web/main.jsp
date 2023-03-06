@@ -9,85 +9,18 @@
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
     <style>
-
-        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nunito:wght@700&display=swap');
-
-
-        #mybg {
-            position: relative;
-            background-image: url("/images/bgtheater.webp");
-            background-size: cover;
-            width: 100%;
-            height: 100%;
-        }
-
-        #mydiv {
-            width: 51rem;
-            height: 31rem;
-        }
-
-        #bgtext {
-            padding: 50px 40px 0;
-            width: 60%;
-        }
-
-        #bgtext > div > div {
-            position: absolute;
-            font-family: 'Gowun Dodum', sans-serif;
-            animation-name: move;
-            animation-duration: 10s;
-            animation-play-state: running;
-            animation-iteration-count: 1;
-            animation-direction: normal;
-            width: 80%;
-            text-align: center;
-
-        }
-
-        #bgtext > div {
-            width: 100%;
-            height: 60%;
-            display: flex;
-        }
-
-        #mybg > div > h1 {
-            font-family: 'Nunito', sans-serif;
-        }
-
-        .fw-light {
-            margin: 0;
-        }
-
-        @keyframes move {
-            0% {
-                /*bottom: 220px;*/
-                bottom: 30%;
-            }
-            100% {
-                /*bottom: 360px;*/
-                bottom: 50%;
-            }
-
-
-        }
-
+        @import "/css/main.css";
     </style>
 
 
     <title>지누시네마</title>
 </head>
 <body>
-<% // 서블릿 틀릿
-    request.setCharacterEncoding("UTF-8");
-
-%>
-
-
-<div class="container">
+<%@include file="/header_main.jsp" %>
+<div class="container" style="min-height: 70%; min-width: 100%">
     <div class="wrapper">
-        <%@include file="/header_main.jsp" %>
         <main>
-            <section id="mydiv" class="text-center container">
+            <section id="mydiv" class="text-center">
                 <div id="mybg" class="row">
                     <div id="bgtext" class="col">
                         <h1 class="fw-light">JINU CINEMA</h1>
@@ -105,8 +38,8 @@
             </section>
         </main>
     </div>
-    <%@include file="/footer.jsp" %>
-
 </div>
+<%@include file="/footer.jsp" %>
+
 </body>
 </html>

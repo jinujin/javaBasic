@@ -75,109 +75,63 @@
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nunito:wght@700&display=swap');
-
-        /*.wrapper {*/
-        /*    !*height: auto;*!*/
-        /*    min-height: 100%;*/
-        /*}*/
-
-        .fw-bold {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-
-        li {
-            font-size: 20px;
-        }
-
-        #head_bar li:hover {
-            font-weight: bolder;
-        }
-
-        image {
-            object-fit: cover;
-            height: 100%;
-            width: 100%;
-        }
-
-        header, .text-muted, .description, h2, h3 {
-            font-family: 'Gowun Dodum', sans-serif;
-        }
-
-        .input-group-text > button {
-            width: 100%;
-            height: 100%;
-        }
-
-        html, body {
-            height: 100%;
-        }
-
-        .average {
-            margin: 20px 0px;
-            font-size: 25px;
-            font-weight: bold;
-        }
-
+        @import "/css/movieOne.css";
     </style>
 </head>
 <body>
 
-<div class="container" style="width: 100%; min-height: 600px">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-        <a href="/main.jsp" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-            <svg class="bi me-2" width="150" height="40" role="img">
-                <text x="0" y="35" font-size="22" font-family="Arial" font-weight="bold">
-                    JINU CINEMA
-                </text>
-            </svg>
-        </a>
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <a href="/main.jsp" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <svg class="bi me-2" width="150" height="40" role="img">
+            <text x="0" y="35" font-size="22" font-family="Arial" font-weight="bold">
+                JINU CINEMA
+            </text>
+        </svg>
+    </a>
 
-        <ul id="head_bar" class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="/main.jsp" class="nav-link px-5 link-dark">메인</a></li>
-            <li><a href="/movie/movieList.jsp" class="nav-link px-5 link-dark">영화</a></li>
-            <li><a href="#" class="nav-link px-5 link-dark">극장</a></li>
-            <li><a href="#" class="nav-link px-5 link-dark">상영정보</a></li>
-            <%--<li><a href="#" class="nav-link px-2 link-dark"></a></li> <!--영화 순위 (평점 기준)-->--%>
-        </ul>
+    <ul id="head_bar" class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="/main.jsp" class="nav-link px-4 link-dark">메인</a></li>
+        <li><a href="/movie/movieList.jsp" class="nav-link px-4 link-dark">영화</a></li>
+        <li><a href="/cinema/cinemaList.jsp" class="nav-link px-4 link-dark">극장</a></li>
+        <li><a href="/show/showList.jsp" class="nav-link px-4 link-dark">상영정보</a></li>
+    </ul>
 
-        <div class="col-md-3 text-end">
-            <div>
-                <c:choose>
-                    <c:when test="${logIn eq null}">
-                        <%=nn%>
-                    </c:when>
-
-                    <c:otherwise>
-                        <span class="fw-bold"><%=nn%>님</span> 반가워요!
-                    </c:otherwise>
-
-                </c:choose>
-            </div>
-
+    <div class="col-md-3 text-end">
+        <div>
             <c:choose>
                 <c:when test="${logIn eq null}">
-                    <button type="button" class="btn btn-outline-primary me-2"
-                            onclick="location.href='/member/login.jsp'">
-                        Login
-                    </button>
-                    <button type="button" class="btn btn-primary" onclick="location.href='/member/register.jsp'">
-                        Sign-up
-                    </button>
+                    <%=nn%>
                 </c:when>
+
                 <c:otherwise>
-                    <button type="button" class="btn btn-outline-primary me-2"
-                            onclick="location.href='/member/mypage.jsp?id=<%=logIn.getId()%>'">
-                        내 정보
-                    </button>
-                    <button type="button" class="btn btn-primary" onclick="location.href='/member/logout.jsp'">로그아웃
-                    </button>
+                    <span class="fw-bold"><%=nn%>님</span> 반가워요!
                 </c:otherwise>
+
             </c:choose>
         </div>
-    </header>
+
+        <c:choose>
+            <c:when test="${logIn eq null}">
+                <button type="button" class="btn btn-outline-primary me-2"
+                        onclick="location.href='/member/login.jsp'">
+                    Login
+                </button>
+                <button type="button" class="btn btn-primary" onclick="location.href='/member/register.jsp'">
+                    Sign-up
+                </button>
+            </c:when>
+            <c:otherwise>
+                <button type="button" class="btn btn-outline-primary me-2"
+                        onclick="location.href='/member/mypage.jsp?id=<%=logIn.getId()%>'">
+                    내 정보
+                </button>
+                <button type="button" class="btn btn-primary" onclick="location.href='/member/logout.jsp'">로그아웃
+                </button>
+            </c:otherwise>
+        </c:choose>
+    </div>
+</header>
+<div class="container" style="width: 80%; min-height: 70%">
     <main>
         <c:set var="m" value="<%=m%>"/>
         <c:if test="${m != null && m.level==3}">
@@ -201,7 +155,6 @@
                     </svg>
                 </div>
                 <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-success"></strong>
                     <h2 class="mb-3"><%=f.getTitle()%>
                     </h2>
                     <div class="mb-5 text-muted">관람 등급 : <%=f.getRating()%>
@@ -285,10 +238,9 @@
                 </c:forEach>
             </c:otherwise>
         </c:choose>
-
     </div>
-    <%@include file="/footer.jsp" %>
 </div>
+<%@include file="/footer.jsp" %>
 
 </body>
 </html>

@@ -17,7 +17,7 @@ public class ShowingController {
     }
 
     public void insert(ShowingDTO showingDTO) {
-        String query = "INSERT INTO `showing`(`film_id`,`cinema_id`,`time`) VALUES(?,?,?)";
+        String query = "INSERT INTO `showing`(`film_id`,`cinema_id`,`time`,`date`,`room_id`) VALUES(?,?,?,?,?)";
 
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
@@ -25,6 +25,8 @@ public class ShowingController {
             pstmt.setInt(1, showingDTO.getFilmId());
             pstmt.setInt(2, showingDTO.getCinemaId());
             pstmt.setString(3, showingDTO.getTime());
+            pstmt.setString(4, showingDTO.getDate());
+            pstmt.setInt(5,showingDTO.getRoomId());
 
             pstmt.executeUpdate();
 
@@ -53,6 +55,8 @@ public class ShowingController {
                 s.setFilmId(resultSet.getInt("film_id"));
                 s.setCinemaId(resultSet.getInt("cinema_id"));
                 s.setTime(resultSet.getString("time"));
+                s.setDate(resultSet.getString("date"));
+                s.setRoomId(resultSet.getInt("room_id"));
 
                 list.add(s);
             }
@@ -87,6 +91,8 @@ public class ShowingController {
                 s.setFilmId(resultSet.getInt("film_id"));
                 s.setCinemaId(resultSet.getInt("cinema_id"));
                 s.setTime(resultSet.getString("time"));
+                s.setDate(resultSet.getString("date"));
+                s.setRoomId(resultSet.getInt("room_id"));
 
             }
 
@@ -102,12 +108,16 @@ public class ShowingController {
     }
 
     public void update(ShowingDTO showingDTO) {
-        String query = "UPDATE `showing` SET `time` = ? WHERE `id` = ?";
+        String query = "UPDATE `showing` SET `time` = ?, `date` = ?,`film_id` = ?, `cinema_id` = ?, `room_id` = ? WHERE `id` = ?";
 
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, showingDTO.getTime());
-            pstmt.setInt(2,showingDTO.getId());
+            pstmt.setString(2, showingDTO.getDate());
+            pstmt.setInt(3,showingDTO.getFilmId());
+            pstmt.setInt(4,showingDTO.getCinemaId());
+            pstmt.setInt(5,showingDTO.getRoomId());
+            pstmt.setInt(6,showingDTO.getId());
 
             pstmt.executeUpdate();
 

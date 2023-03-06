@@ -55,6 +55,7 @@ public class FilmController {
                 list.add(f);
             }
 
+            resultSet.close();
             pstmt.close();
 
         } catch (SQLException e) {

@@ -8,5 +8,4 @@ public class CinemaDTO {
     private String name;
     private String location;
     private String number;
-    private int filmId;
 }

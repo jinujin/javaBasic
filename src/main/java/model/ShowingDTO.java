@@ -8,4 +8,6 @@ public class ShowingDTO {
     private int filmId;
     private int cinemaId;
     private String time;
+    private String date;
+    private int roomId;
 }

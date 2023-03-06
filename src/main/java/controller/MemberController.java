@@ -7,9 +7,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class MemberController {
     private Connection connection;
+    private ArrayList<MemberDTO> rankList;
+//    private ArrayList<MemberDTO> criticList;
     public MemberController(ConnectionMaker connectionMaker){
         this.connection = connectionMaker.makeConnection();
     }
@@ -32,6 +35,25 @@ public class MemberController {
         }
         return true;
     }
+    public boolean validateUsername(String username) {
+        String query = "SELECT * FROM `member` WHERE `username` = ?";
+        boolean result = true;
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, username);
+            ResultSet resultSet = pstmt.executeQuery();
+            if (resultSet.next()) {
+                result = false;
+            }
+
+            resultSet.close();
+            pstmt.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     public MemberDTO auth(String username, String password){
         String query = "SELECT * FROM `member` WHERE `username` = ? AND `password` = ?";
@@ -49,6 +71,7 @@ public class MemberController {
                 memberDTO.setUsername(resultSet.getString("username"));
                 // password는 보안상 좋지 않음
                 memberDTO.setNickname(resultSet.getString("nickname"));
+                memberDTO.setLevel(resultSet.getInt("level"));
 
                 return memberDTO;
             }
@@ -127,6 +150,26 @@ public class MemberController {
         }
         return m;
     }
+
+    public void rankUp(int id, int level) {
+        MemberDTO m = new MemberDTO();
+        String query = "UPDATE `member` SET `level` = ? WHERE `id` = ?";
+
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(query);
+
+            pstmt.setInt(1,level);
+            pstmt.setInt(2, id);
+
+            pstmt.executeUpdate();
+
+            pstmt.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }

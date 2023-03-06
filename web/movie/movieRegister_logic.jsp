@@ -16,6 +16,7 @@
 <body>
 <%
     request.setCharacterEncoding("UTF-8");
+
     String title = request.getParameter("title");
     String rate = request.getParameter("rate");
     String description = request.getParameter("description");

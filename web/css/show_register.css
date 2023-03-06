@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nunito:wght@700&display=swap');
+
+.list-item{
+    margin: 10px;
+
+
+}
+.lists{
+    display: flex;
+    justify-content: space-around;
+}
+.fw-bold {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+li {
+    font-size: 20px;
+}
+
+.lists, h1, h2, h3, h4 {
+    font-family: 'Gowun Dodum', sans-serif;
+}
+
+.input-group-text > button {
+    width: 100%;
+    height: 100%;
+}
+
+html, body {
+    height: 100%;
+}

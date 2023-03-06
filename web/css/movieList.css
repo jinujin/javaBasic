@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nunito:wght@700&display=swap');
+header{
+    font-family: 'Gowun Dodum', sans-serif;
+}
+#head_bar li:hover {
+    font-weight: bolder;
+}
+
+.wrapper {
+    height: auto;
+    min-height: 100%;
+}
+
+footer {
+    position: relative;
+    transform: translateY(-100%);
+    padding-top: 16px;
+    margin-top: 24px;
+    font-family: 'Gowun Dodum', sans-serif;
+
+}
+
+.film_list {
+    border-radius: 10px;
+    background-color: #F7F7F7;
+    width: 25rem;
+    height: 34rem;
+    padding: 10px;
+}
+
+main {
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+}
+
+img {
+    border: 1px solid lightgray;
+    width: 330px;
+    height: 470px;
+    object-fit: cover;
+    margin-bottom: 2px;
+}
+
+.film_text {
+    width: 100%;
+    height: 64px;
+    line-height: 64px;
+    padding-bottom: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 25px;
+    font-family: 'Gowun Dodum', sans-serif;
+}
+
+.container {
+    margin: 0 auto;
+
+}
+li{
+    font-size: 20px;
+}

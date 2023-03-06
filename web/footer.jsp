@@ -18,7 +18,11 @@
 
         footer{
             font-family: 'Gowun Dodum', sans-serif;
-
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+        .nav-item{
+            font-size: 20px;
         }
     </style>
     <title>Title</title>
@@ -38,8 +42,8 @@
     <ul class="nav col-md-4 justify-content-end">
         <li class="nav-item"><a href="/main.jsp" class="nav-link px-2 text-muted">메인</a></li>
         <li class="nav-item"><a href="/movie/movieList.jsp" class="nav-link px-2 text-muted">영화</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">극장</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">상영정보</a></li>
+        <li class="nav-item"><a href="/cinema/cinemaList.jsp" class="nav-link px-2 text-muted">극장</a></li>
+        <li class="nav-item"><a href="/show/showList.jsp" class="nav-link px-2 text-muted">상영정보</a></li>
     </ul>
 </footer>
 
