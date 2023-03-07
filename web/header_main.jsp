@@ -3,6 +3,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="controller.*" %>
 <%@ page import="model.*" %>
+<%@ page import="java.lang.reflect.Member" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -65,13 +66,14 @@
         m = memberController.selectOne(logIn.getId());
     }
 
+    ArrayList<MemberDTO> mlist = memberController.selectAll();
     ArrayList<FilmDTO> flist = filmController.selectAll();
     ArrayList<ShowingDTO> slist = showingController.selectAll();
     ArrayList<RoomDTO> rlist = roomController.selectAll();
     ArrayList<CinemaDTO> clist = cinemaController.selectAll();
     ArrayList<RankDTO> ralist = rankController.selectAll();
 
-
+    pageContext.setAttribute("mlist", mlist);
     pageContext.setAttribute("flist", flist);
     pageContext.setAttribute("slist", slist);
     pageContext.setAttribute("rlist", rlist);

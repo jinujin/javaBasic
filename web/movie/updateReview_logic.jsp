@@ -16,7 +16,6 @@
 </head>
 <body>
 <%
-  request.setCharacterEncoding("UTF-8");
   MemberDTO logIn = (MemberDTO) session.getAttribute("logIn");
 
   if (logIn == null) {

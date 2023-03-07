@@ -8,11 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
-    <style>
-        @import "/css/main.css";
-    </style>
-
-
+    <link href="/css/main.css" rel="stylesheet"/>
+    <link href="/images/film.png" rel="shortcut icon" type="image/x-icon">
     <title>지누시네마</title>
 </head>
 <body>

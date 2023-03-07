@@ -70,6 +70,7 @@ public class MemberController {
                 memberDTO.setId(resultSet.getInt("id"));
                 memberDTO.setUsername(resultSet.getString("username"));
                 // password는 보안상 좋지 않음
+//                memberDTO.setPassword(resultSet.getString("password"));
                 memberDTO.setNickname(resultSet.getString("nickname"));
                 memberDTO.setLevel(resultSet.getInt("level"));
 
@@ -143,12 +144,40 @@ public class MemberController {
                 m.setEmail(resultSet.getString("email"));
                 m.setLevel(resultSet.getInt("level"));
                 m.setPassword(resultSet.getString("password"));
+                m.setEmail(resultSet.getString("email"));
 
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return m;
+    }
+
+    public ArrayList<MemberDTO> selectAll() {
+        ArrayList<MemberDTO> list = new ArrayList<>();
+        String query = "SELECT * FROM `member` ORDER BY `id`";
+
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            ResultSet resultSet = pstmt.executeQuery();
+
+            while (resultSet.next()) {
+                MemberDTO m = new MemberDTO();
+                m.setUsername(resultSet.getString("username"));
+                m.setId(resultSet.getInt("id"));
+                m.setNickname(resultSet.getString("nickname"));
+                m.setEmail(resultSet.getString("email"));
+                m.setLevel(resultSet.getInt("level"));
+                m.setPassword(resultSet.getString("password"));
+
+                list.add(m);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+
     }
 
     public void rankUp(int id, int level) {

@@ -19,12 +19,15 @@ import java.io.PrintWriter;
 public class MemberDeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        final int MASTER = 1;
         ConnectionMaker connectionMaker = new MysqlConnectionMaker();
         MemberController memberController = new MemberController(connectionMaker);
         int id = Integer.parseInt(request.getParameter("id"));
         MemberDTO m = memberController.selectOne(id);
-
         PrintWriter writer = response.getWriter();
+
+        HttpSession session = request.getSession();
+        MemberDTO logIn = (MemberDTO) (session.getAttribute("logIn"));
 
         JsonObject object = new JsonObject();
 
@@ -34,36 +37,59 @@ public class MemberDeleteServlet extends HttpServlet {
         String message = "";
 
         try {
-            HttpSession session = request.getSession();
-            MemberDTO logIn = (MemberDTO) (session.getAttribute("logIn"));
 
-            if (logIn == null||m == null || m.getId() != logIn.getId()) {
+            String oldPassword = request.getParameter("oldPassword");
+
+            if (logIn == null || m == null || memberController.auth(logIn.getUsername(), oldPassword) == null) {
                 throw new NullPointerException();
             }
+            if (logIn.getId() != MASTER && id == MASTER) {
+                throw new NullPointerException();
+            }
+
             memberController.delete(id);
-            session.invalidate();
 
-            content = "탈퇴 완료";
-            status = "success";
-            nextPath = "/main.jsp";
-            message = "정상적으로 탈퇴 되었습니다.";
-
+            if (logIn.getLevel() == 3 && logIn.getId() != id) {
+                content = "탈퇴 완료";
+                status = "success";
+                nextPath = "/member/updateRank.jsp";
+                message = "정상적으로 탈퇴 되었습니다.";
+            } else {
+                content = "탈퇴 완료";
+                status = "success";
+                nextPath = "/main.jsp";
+                message = "정상적으로 탈퇴 되었습니다.";
+            }
         } catch (Exception e) {
-
-            content = "탈퇴 실패";
-            status = "error";
-            nextPath = "/main.jsp";
-            message = "탈퇴가 되지 않았습니다. (로그인 확인)";
+            e.printStackTrace();
+            if (logIn.getId() != MASTER && id == MASTER) {
+                content = "!!! 무엄하구나 !!!";
+                status = "error";
+                nextPath = "/member/updateRank.jsp";
+                message = "조물주는 탈퇴시킬 수 없습니다.";
+            } else if (logIn.getLevel() == 3 && logIn != null && logIn.getId() != id) {
+                content = "탈퇴 실패";
+                status = "error";
+                nextPath = "/member/updateRank.jsp";
+                message = "비밀번호를 확인 바람";
+            } else {
+                content = "탈퇴 실패";
+                status = "error";
+                nextPath = "/member/mypage.jsp?id=" + id;
+                message = "비밀번호 확인하세요.";
+            }
         }
-        object.addProperty("status",status);
-        object.addProperty("message",message);
-        object.addProperty("nextPath",nextPath);
-        object.addProperty("content",content);
+        if (m == null) {
+            session.invalidate();
+        }
+        object.addProperty("status", status);
+        object.addProperty("message", message);
+        object.addProperty("nextPath", nextPath);
+        object.addProperty("content", content);
 
         writer.print(object);
 
     }
-
 
 
     @Override

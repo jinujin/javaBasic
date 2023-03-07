@@ -20,10 +20,10 @@
     <script src="/assets/js/member/rankUp.js"></script>
 
     <link href="/css/mypage.css" rel="stylesheet"/>
+    <link href="/images/film.png" rel="shortcut icon" type="image/x-icon">
 
     <title>내 정보</title>
     <%
-        request.setCharacterEncoding("UTF-8");
 
         MemberDTO logIn = (MemberDTO) session.getAttribute("logIn");
         if (logIn == null) {
@@ -153,12 +153,12 @@
             </div>
 
             <div class="button">
-                <button type="button" class="btn btn-outline-danger btn-sm" onclick="deleteMember()">회원탈퇴
+                <button type="button" class="btn btn-outline-danger btn-sm" onclick="deleteMember(${m.id})">회원탈퇴
                 </button>
                 <c:choose>
                     <c:when test="${m ne null and m.level eq 3}">
                         <button type="button" class="btn btn-outline-success btn-sm"
-                                onclick="location.href='/member/updateRank.jsp'">등급 관리
+                                onclick="location.href='/member/updateRank.jsp'">회원 관리
                         </button>
                     </c:when>
                     <c:otherwise>

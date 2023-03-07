@@ -16,28 +16,36 @@
 </head>
 <body>
 <%
-    request.setCharacterEncoding("UTF-8");
     MemberDTO logIn = (MemberDTO) session.getAttribute("logIn");
+
+    ConnectionMaker connectionMaker = new MysqlConnectionMaker();
+    GradeController gradeController = new GradeController(connectionMaker);
 
     int filmId = Integer.parseInt(request.getParameter("filmId"));
     double score = Double.parseDouble(request.getParameter("score"));
-    String criticism = request.getParameter("criticism");
 
-    if (logIn == null) {
+    String criticism = request.getParameter("criticism");
+    int writerId = Integer.parseInt(request.getParameter("id"));
+    boolean result = gradeController.validateMemberId(writerId,filmId);
+
+    if (logIn == null || writerId == 0) {
         response.sendRedirect("/member/login.jsp");
     } else {
-        GradeDTO gradeDTO = new GradeDTO();
-        gradeDTO.setFilmId(filmId);
-        gradeDTO.setScore(score);
-        gradeDTO.setCriticism(criticism);
-        gradeDTO.setWriterId(logIn.getId());
+        if (!result) {
+            // 중복
+            response.sendRedirect("/movie/movieOne.jsp?filmId=" + filmId);
+        } else {
+            GradeDTO gradeDTO = new GradeDTO();
+            gradeDTO.setFilmId(filmId);
+            gradeDTO.setScore(score);
+            gradeDTO.setCriticism(criticism);
+            gradeDTO.setWriterId(logIn.getId());
 
-        ConnectionMaker connectionMaker = new MysqlConnectionMaker();
-        GradeController gradeController = new GradeController(connectionMaker);
 
-        gradeController.insert(gradeDTO);
+            gradeController.insert(gradeDTO);
 
-        response.sendRedirect("/movie/movieOne.jsp?filmId=" + filmId);
+            response.sendRedirect("/movie/movieOne.jsp?filmId=" + filmId);
+        }
     }
 %>
 

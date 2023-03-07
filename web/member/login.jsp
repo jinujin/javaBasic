@@ -62,8 +62,10 @@
                     </div>
                 </div>
                 <div class="row justify-content-center mb-2">
-                    <div class="col-5">
-                        <button class="w-50 btn btn-lg btn-primary" onclick="auth()">로 그 인</button>
+                    <div>
+                        <button class="row-6 btn btn-lg btn-outline-primary" onclick="location.href='/member/register.jsp'">회원가입</button>
+                        <button class="row-6 btn btn-lg btn-primary" onclick="auth()">로 그 인</button>
+
                         <br>
                         <p class="mt-5 mb-3 text-muted">© JINU CINEMA</p>
                     </div>

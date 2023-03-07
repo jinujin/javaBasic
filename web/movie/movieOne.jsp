@@ -15,7 +15,6 @@
 <html>
 <head>
     <% // 서블릿 틀릿
-        request.setCharacterEncoding("UTF-8");
         MemberDTO logIn = (MemberDTO) session.getAttribute("logIn");
 
         int filmId = Integer.parseInt(request.getParameter("filmId"));
@@ -57,6 +56,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <title><%=f.getTitle()%>
     </title>
     <script>
@@ -67,6 +68,7 @@
                 <%=filmId%>
             }
         }
+
         function deleteMovie(fid) {
             let result = confirm("정말로 삭제하시겠습니까?");
             if (result) {
@@ -74,9 +76,7 @@
             }
         }
     </script>
-    <style>
-        @import "/css/movieOne.css";
-    </style>
+    <link href="/css/movieOne.css" rel="stylesheet"/>
 </head>
 <body>
 
@@ -134,6 +134,9 @@
 <div class="container" style="width: 80%; min-height: 70%">
     <main>
         <c:set var="m" value="<%=m%>"/>
+        <c:set var="list" value="<%=list%>"/>
+        <c:set var="logIn" value="<%=logIn%>"/>
+        <c:set var="memberController" value="<%=memberController%>"/>
         <c:if test="${m != null && m.level==3}">
             <div class="aboutMovie">
                 <button class="btn btn-outline-secondary btn-lg mb-4"
@@ -166,10 +169,16 @@
             </div>
         </div>
     </main>
-
+<%
+    int nullCheck;
+    if (logIn == null) {
+        nullCheck = 0;
+    } else {
+        nullCheck = logIn.getId();
+    }
+%>
     <h3 class="mb-4"><span class="fw-bold"><%=f.getTitle() %></span> 어떠셨나요?</h3>
-    <form action="/movie/review_logic.jsp?filmId=<%=filmId%>" method="post">
-
+    <form action="/movie/review_logic.jsp?filmId=<%=filmId%>&id=<%=nullCheck%>" method="post">
         <div class="col-md-3">
             <label for="score" class="form-label">Score</label>
             <select class="form-select is-invalid form-control" id="score" name="score">
@@ -197,9 +206,6 @@
         </div>
     </form>
     <div class="col">
-        <c:set var="list" value="<%=list%>"/>
-        <c:set var="logIn" value="<%=logIn%>"/>
-
         <c:choose>
             <c:when test="${list.isEmpty()}">
                 <div class="row">
@@ -216,15 +222,15 @@
                 <c:forEach var="g" items="${list}">
                     <div class="col">
 
-                        <div class="border-bottom mb-3">
+                        <div class="border-bottom mb-3 for-update">
                             <div class="col-md-2 mb-2">
                                 점수 : ${g.score}
                             </div>
                             <div class="col-md-10 mb-2">
                                     ${g.criticism}
                             </div>
-                            <div>
-                                작성 시간 : <fmt:formatDate value="${g.entry_date}" pattern="yyyy년 MM월 dd일 HH시 mm분 ss초"/>
+                            <div style="color:darkgray">
+                                    ${memberController.selectOne(g.writerId).nickname} | <fmt:formatDate value="${g.entry_date}" pattern="yyyy년 MM월 dd일 HH시 mm분 ss초"/>
                             </div>
                         </div>
                         <c:if test="${g.writerId eq logIn.id}">

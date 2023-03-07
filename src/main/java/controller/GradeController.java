@@ -139,4 +139,25 @@ public class GradeController {
         }
     }
 
+    public boolean validateMemberId(int memberId, int filmId) {
+        String query = "SELECT * FROM `grade` WHERE `writer_id` = ? AND `film_id`=?";
+        boolean result = true;
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, memberId);
+            pstmt.setInt(2,filmId);
+            ResultSet resultSet = pstmt.executeQuery();
+            if (resultSet.next()) {
+                result = false;
+            }
+
+            resultSet.close();
+            pstmt.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

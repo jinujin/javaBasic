@@ -11,7 +11,7 @@
     <style>
         @import "/css/movieList.css";
     </style>
-
+    <link href="/images/film.png" rel="shortcut icon" type="image/x-icon">
     <title>무비</title>
 
 </head>
